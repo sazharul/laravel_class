@@ -29,10 +29,14 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
-
+                    @guest
+                    @else
+                    <ul class="navbar-nav me-auto custom_btn_list">
+                        <li><a class="custom_btn" href="{{ route('category.index') }}">Category</a></li>
+                        <li><a class="custom_btn" href="{{ route('brand.index') }}">Brand</a></li>
+                        <li><a class="custom_btn" href="{{ route('unit.index') }}">Unit</a></li>
                     </ul>
-
+                    @endguest
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->

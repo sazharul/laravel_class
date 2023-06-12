@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UnitController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,7 +30,10 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 
 Route::middleware(['auth'])->prefix('admin')->group(function () {
-    Route::resource('/category', CategoryController::class);
     Route::get('/profile', [ProfileController::class, 'profile']);
+
+    Route::resource('/category', CategoryController::class);
+    Route::resource('/brand', BrandController::class);
+    Route::resource('/unit', UnitController::class);
 
 });
