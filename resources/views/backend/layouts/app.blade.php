@@ -35,6 +35,7 @@
                         <li><a class="custom_btn" href="{{ route('category.index') }}">Category</a></li>
                         <li><a class="custom_btn" href="{{ route('brand.index') }}">Brand</a></li>
                         <li><a class="custom_btn" href="{{ route('unit.index') }}">Unit</a></li>
+                        <li><a class="custom_btn" href="{{ route('product.index') }}">Products</a></li>
                     </ul>
                     @endguest
                     <!-- Right Side Of Navbar -->
