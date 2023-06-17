@@ -44,6 +44,10 @@
                             <li><a class="custom_btn" href="{{ route('unit.index') }}">Unit</a></li>
                             <li><a class="custom_btn" href="{{ route('unit.index') }}">Products</a></li>
                         </ul>
+                    @else
+                        <ul class="navbar-nav me-auto custom_btn_list">
+                            <li><a class="custom_btn" href="#">Cart (<span>0</span>)</a></li>
+                        </ul>
                     @endif
                 @endguest
 

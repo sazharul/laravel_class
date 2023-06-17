@@ -36,7 +36,7 @@
                     @php
                         $auth_user = \Illuminate\Support\Facades\Auth::user();
                     @endphp
-                    @if($auth_user == 'admin')
+                    @if($auth_user->roles == 'admin')
                         <ul class="navbar-nav me-auto custom_btn_list">
                             <li><a class="custom_btn" href="{{ route('category.index') }}">Category</a></li>
                             <li><a class="custom_btn" href="{{ route('brand.index') }}">Brand</a></li>
