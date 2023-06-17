@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 
+Route::get('/user-profile', [HomeController::class, 'user_profile'])->name('user_profile');
 Route::get('/', [HomeController::class, 'index']);
 Route::post('/profile/create', [ProfileController::class, 'store'])->name('profile_create');
 Route::get('/asdf', [HomeController::class, 'index']);
@@ -30,7 +31,7 @@ Route::get('/asdf', [HomeController::class, 'index']);
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 
-Route::middleware(['auth'])->prefix('admin')->group(function () {
+Route::middleware(['auth', 'custom'])->prefix('admin')->group(function () {
     Route::get('/profile', [ProfileController::class, 'profile']);
 
     Route::resource('/category', CategoryController::class);
