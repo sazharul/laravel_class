@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UnitController;
+use App\Http\Controllers\SendEmailController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,7 +26,7 @@ Auth::routes();
 Route::get('/', [HomeController::class, 'index']);
 Route::post('/profile/create', [ProfileController::class, 'store'])->name('profile_create');
 Route::get('/asdf', [HomeController::class, 'index']);
-
+Route::get('send-email', [SendEmailController::class, 'index']);
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
