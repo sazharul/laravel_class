@@ -16,7 +16,7 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::orderBy('id', 'asc')->paginate(10);
-        return view('backend.product.index', compact('products'));
+        return view('backend.product.products', compact('products'));
     }
 
     /**
@@ -65,7 +65,8 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $product = Product::findOrFail($id);
+        return view('backend.product.show', compact('product'));
     }
 
     /**
@@ -73,7 +74,9 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $product = Product::findOrFail($id);
+
+        return view('backend.product.edit', compact('product'));
     }
 
     /**
@@ -81,7 +84,86 @@ class ProductController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $requestData = $request->except('image');
+
+        $file = $request->image;
+        if ($file) {
+            $extention = $file->getClientOriginalExtension();
+            $fileName = time() . rand(1, 999999) . '.' . $extention;
+            $file->move('images', $fileName);
+            $path = '/images/' . $fileName;
+            $requestData['image'] = $path;
+        }
+
+
+        $product = Product::findOrFail($id);
+        $product->update($requestData);
+
+        return redirect()->route('product.index');
+    }
+
+
+    public function cart()
+    {
+        return view('backend.product.cart');
+    }
+  
+    /**
+     * Write code on Method
+     *
+     * @return response()
+     */
+    public function addToCart($id)
+    {
+        $product = Product::findOrFail($id);
+          
+        $cart = session()->get('cart', []);
+  
+        if(isset($cart[$id])) {
+            $cart[$id]['quantity']++;
+        } else {
+            $cart[$id] = [
+                "name" => $product->name,
+                "quantity" => 1,
+                "price" => $product->price,
+                "image" => $product->image
+            ];
+        }
+          
+        session()->put('cart', $cart);
+        return redirect()->back()->with('success', 'Product added to cart successfully!');
+    }
+  
+    /**
+     * Write code on Method
+     *
+     * @return response()
+     */
+    public function update_cart(Request $request)
+    {
+        if($request->id && $request->quantity){
+            $cart = session()->get('cart');
+            $cart[$request->id]["quantity"] = $request->quantity;
+            session()->put('cart', $cart);
+            session()->flash('success', 'Cart updated successfully');
+        }
+    }
+  
+    /**
+     * Write code on Method
+     *
+     * @return response()
+     */
+    public function remove(Request $request)
+    {
+        if($request->id) {
+            $cart = session()->get('cart');
+            if(isset($cart[$request->id])) {
+                unset($cart[$request->id]);
+                session()->put('cart', $cart);
+            }
+            session()->flash('success', 'Product removed successfully');
+        }
     }
 
     /**
