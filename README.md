@@ -68,3 +68,5 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 https://www.tutsmake.com/laravel-10-send-email-example/
 
 https://www.itsolutionstuff.com/post/laravel-shopping-add-to-cart-with-ajax-exampleexample.html
+
+https://github.com/sslcommerz/SSLCommerz-Laravel/tree/master

@@ -107,7 +107,7 @@ class ProductController extends Controller
     {
         return view('backend.product.cart');
     }
-  
+
     /**
      * Write code on Method
      *
@@ -116,9 +116,10 @@ class ProductController extends Controller
     public function addToCart($id)
     {
         $product = Product::findOrFail($id);
-          
+
+        return $product;
         $cart = session()->get('cart', []);
-  
+
         if(isset($cart[$id])) {
             $cart[$id]['quantity']++;
         } else {
@@ -129,11 +130,21 @@ class ProductController extends Controller
                 "image" => $product->image
             ];
         }
-          
         session()->put('cart', $cart);
-        return redirect()->back()->with('success', 'Product added to cart successfully!');
+        return count((array) session('cart'));
+
+
+//        return response()->json([
+//            'status' => 'success',
+//            'code' => '200',
+//            'data' => count((array) session('cart'))
+//        ]);
+
+
+//        session()->put('cart', $cart);
+//        return redirect()->back()->with('success', 'Product added to cart successfully!');
     }
-  
+
     /**
      * Write code on Method
      *
@@ -148,7 +159,7 @@ class ProductController extends Controller
             session()->flash('success', 'Cart updated successfully');
         }
     }
-  
+
     /**
      * Write code on Method
      *
