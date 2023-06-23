@@ -1,49 +1,36 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+    <section style="background-color: #eee;">
+        <div class="container py-5">
+            <div class="row">
+                @foreach($products as $item)
+                    <div class="col-md-12 col-lg-4 mb-4">
+                        <div class="card">
+                            <div class="d-flex justify-content-between p-3">
+                                <p class="lead mb-0">{{ substr($item->name, 0, 30) }} ..</p>
+                            </div>
+                            <img style="height: auto; max-height: 200px;" src="{{ asset($item->image) }}"
+                                 class="card-img-top" alt="Laptop"/>
+                            <div class="card-body">
+{{--                                <div class="d-flex justify-content-between">--}}
+{{--                                    <p class="small">--}}
+{{--                                        <a href="#!" class="text-muted">{{ (isset($item->brand)) ? $item->brand->name : '' }}</a>--}}
+{{--                                    </p>--}}
+{{--                                </div>--}}
 
-                <div class="card-body">
-                    <form method="post" action="{{ route('profile_create') }}">
-                        @csrf
-                        <div class="mb-3">
-                            <label for="name" class="form-label">Name</label>
-                            <input type="text" class="form-control" name="name" id="name" aria-describedby="emailHelp">
+                                <div class="d-flex justify-content-between mb-3">
+{{--                                    <h5 class="mb-0">{{ (isset($item->category)) ? $item->category->name : '' }}</h5>--}}
+                                    <h5 class="text-dark mb-0">BDT {{ $item->price }}</h5>
+                                </div>
+                                <div class="d-flex justify-content-between mb-3">
+                                    <a href="#" class="btn btn-primary">Add To Cart</a>
+                                </div>
+                            </div>
                         </div>
-
-                        <div class="mb-3">
-                            <label for="phone" class="form-label">Phone Number</label>
-                            <input type="number" name="phone" class="form-control" id="phone" aria-describedby="emailHelp">
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Email address</label>
-                            <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="details" class="form-label">Details</label>
-                            <textarea class="form-control" name="details" id="details" cols="30" rows="3"></textarea>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="status" class="form-label">Status</label>
-                            <select class="form-control" name="status" id="status">
-                                <option value="">Select One</option>
-                                <option value="Active">Active</option>
-                                <option value="InActive">InActive</option>
-                            </select>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
-                </div>
+                    </div>
+                @endforeach
             </div>
         </div>
-    </div>
-</div>
+    </section>
 @endsection

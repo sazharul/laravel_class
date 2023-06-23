@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +24,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $products = Product::where('status', 'active')->orderBy('name', 'asc')->paginate(10);
+        return view('home', compact('products'));
+    }
+
+    public function user_profile()
+    {
+        return view('user_profile');
     }
 }
