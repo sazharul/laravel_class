@@ -47,12 +47,7 @@
             <td colspan="5" class="text-right">
                 <a href="{{ url('/') }}" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a>
 
-                <form action="/pay" style="display: inline-block;" method="post">
-                    @csrf
-                    <input type="hidden" name="total_amount" value="{{ $total }}">
-
-                    <button class="btn btn-success" type="submit">Checkout</button>
-                </form>
+                <a href="{{ route('checkout') }}" class="btn btn-success">Checkout</a>
             </td>
         </tr>
         </tfoot>
