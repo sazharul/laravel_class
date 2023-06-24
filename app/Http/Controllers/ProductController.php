@@ -108,6 +108,11 @@ class ProductController extends Controller
         return view('backend.product.cart');
     }
 
+    public function checkout()
+    {
+        return view('backend.product.checkout');
+    }
+
     /**
      * Write code on Method
      *
@@ -117,7 +122,6 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($id);
 
-        return $product;
         $cart = session()->get('cart', []);
 
         if(isset($cart[$id])) {

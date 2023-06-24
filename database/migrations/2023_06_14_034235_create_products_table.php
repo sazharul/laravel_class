@@ -16,9 +16,9 @@ return new class extends Migration
             $table->string('name');
             $table->double('price');
             $table->text('image')->nullable();
-            $table->integer('brand_id');
-            $table->integer('category_id');
-            $table->integer('unit_id');
+            $table->integer('brand_id')->nullable();
+            $table->integer('category_id')->nullable();
+            $table->integer('unit_id')->nullable();
             $table->text('description')->nullable();
             $table->string('status')->default('Active');
             $table->timestamps();
